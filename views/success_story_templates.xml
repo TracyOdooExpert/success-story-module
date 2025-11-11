@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Individual Success Story Page Template -->
+    <template id="success_story_detail_page" name="Success Story Detail Page">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+                <section class="s_success_story_detail pt-5 pb-5">
+                    <div class="container">
+                        <!-- Header Section -->
+                        <div class="row mb-4">
+                            <div class="col-lg-8 mx-auto text-center">
+                                <div class="mb-3" t-if="story.logo">
+                                    <img t-att-src="'/web/image/success.story/%s/logo' % story.id" 
+                                         t-att-alt="story.client_id.name" 
+                                         class="img-fluid" 
+                                         style="max-height: 100px;"/>
+                                </div>
+                                <h1 class="display-4 mb-3" t-field="story.name"/>
+                                <p class="lead text-muted">
+                                    <span t-field="story.client_id.name"/> | 
+                                    <span t-field="story.category"/> | 
+                                    <span t-field="story.publication_date" t-options="{'widget': 'date'}"/>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Image -->
+                        <div class="row mb-5" t-if="story.main_image">
+                            <div class="col-12">
+                                <img t-att-src="'/web/image/success.story/%s/main_image' % story.id" 
+                                     t-att-alt="story.name" 
+                                     class="img-fluid rounded shadow-lg w-100"/>
+                            </div>
+                        </div>
+                        
+                        <!-- Short Description -->
+                        <div class="row mb-4">
+                            <div class="col-lg-8 mx-auto">
+                                <p class="lead" t-field="story.short_description"/>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Content -->
+                        <div class="row mb-5">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="s_text_block" t-field="story.main_text"/>
+                            </div>
+                        </div>
+                        
+                        <!-- Video Section -->
+                        <div class="row mb-5" t-if="story.video_embed_code">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="ratio ratio-16x9">
+                                    <iframe t-att-src="story.video_embed_code" 
+                                            frameborder="0" 
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen=""/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Extra Images Grid -->
+                        <div class="row mb-5" t-if="story.extra_image_1 or story.extra_image_2 or story.extra_image_3 or story.extra_image_4">
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <div class="col-md-6" t-if="story.extra_image_1">
+                                        <img t-att-src="'/web/image/success.story/%s/extra_image_1' % story.id" 
+                                             class="img-fluid rounded" alt="Image 1"/>
+                                    </div>
+                                    <div class="col-md-6" t-if="story.extra_image_2">
+                                        <img t-att-src="'/web/image/success.story/%s/extra_image_2' % story.id" 
+                                             class="img-fluid rounded" alt="Image 2"/>
+                                    </div>
+                                    <div class="col-md-6" t-if="story.extra_image_3">
+                                        <img t-att-src="'/web/image/success.story/%s/extra_image_3' % story.id" 
+                                             class="img-fluid rounded" alt="Image 3"/>
+                                    </div>
+                                    <div class="col-md-6" t-if="story.extra_image_4">
+                                        <img t-att-src="'/web/image/success.story/%s/extra_image_4' % story.id" 
+                                             class="img-fluid rounded" alt="Image 4"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Extra Text Sections -->
+                        <div class="row mb-4" t-if="story.extra_text_1">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="s_text_block" t-field="story.extra_text_1"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4" t-if="story.extra_text_2">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="s_text_block" t-field="story.extra_text_2"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4" t-if="story.extra_text_3">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="s_text_block" t-field="story.extra_text_3"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4" t-if="story.extra_text_4">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="s_text_block" t-field="story.extra_text_4"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4" t-if="story.extra_text_5">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="s_text_block" t-field="story.extra_text_5"/>
+                            </div>
+                        </div>
+                        
+                        <!-- Product CTA -->
+                        <div class="row mb-5" t-if="story.product_id">
+                            <div class="col-lg-8 mx-auto text-center">
+                                <div class="card border-primary">
+                                    <div class="card-body p-4">
+                                        <h3 class="card-title">Related Product</h3>
+                                        <p class="card-text" t-field="story.product_id.name"/>
+                                        <a t-att-href="story.product_link_url" 
+                                           class="btn btn-primary btn-lg">
+                                            <span t-field="story.product_link_text"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Related Stories -->
+                        <div class="row mt-5" t-if="related_stories">
+                            <div class="col-12">
+                                <h3 class="mb-4">Related Success Stories</h3>
+                                <div class="row">
+                                    <t t-foreach="related_stories" t-as="related">
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card h-100">
+                                                <img t-if="related.main_image" 
+                                                     t-att-src="'/web/image/success.story/%s/main_image' % related.id" 
+                                                     class="card-img-top" 
+                                                     t-att-alt="related.name"/>
+                                                <div class="card-body">
+                                                    <div class="mb-2" t-if="related.logo">
+                                                        <img t-att-src="'/web/image/success.story/%s/logo' % related.id" 
+                                                             t-att-alt="related.client_id.name" 
+                                                             style="max-height: 40px;"/>
+                                                    </div>
+                                                    <h5 class="card-title" t-field="related.name"/>
+                                                    <p class="card-text text-muted small" t-field="related.short_description"/>
+                                                    <a t-att-href="related.website_url" class="btn btn-outline-primary btn-sm">
+                                                        Read More
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+    
+    <!-- Success Stories List Page -->
+    <template id="success_stories_list_page" name="Success Stories List">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_success_stories_list pt-5 pb-5">
+                    <div class="container">
+                        <div class="row mb-5">
+                            <div class="col-12 text-center">
+                                <h1 class="display-4">Success Stories</h1>
+                                <p class="lead">Discover how our clients achieve success</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Category Filter -->
+                        <div class="row mb-4" t-if="categories">
+                            <div class="col-12">
+                                <div class="btn-group" role="group">
+                                    <a href="/success-stories" 
+                                       t-attf-class="btn btn-outline-primary #{'active' if not current_category else ''}">
+                                        All
+                                    </a>
+                                    <t t-foreach="categories" t-as="cat">
+                                        <a t-att-href="'/success-stories/category/%s' % cat" 
+                                           t-attf-class="btn btn-outline-primary #{'active' if current_category == cat else ''}">
+                                            <t t-esc="cat"/>
+                                        </a>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stories Grid -->
+                        <div class="row">
+                            <t t-foreach="stories" t-as="story">
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100 shadow-sm">
+                                        <img t-if="story.main_image" 
+                                             t-att-src="'/web/image/success.story/%s/main_image' % story.id" 
+                                             class="card-img-top" 
+                                             t-att-alt="story.name"/>
+                                        <div class="card-body">
+                                            <div class="mb-2" t-if="story.logo">
+                                                <img t-att-src="'/web/image/success.story/%s/logo' % story.id" 
+                                                     t-att-alt="story.client_id.name" 
+                                                     style="max-height: 50px;"/>
+                                            </div>
+                                            <h5 class="card-title" t-field="story.name"/>
+                                            <p class="card-text text-muted small">
+                                                <span t-field="story.category"/> | 
+                                                <span t-field="story.publication_date" t-options="{'widget': 'date'}"/>
+                                            </p>
+                                            <p class="card-text" t-field="story.short_description"/>
+                                            <a t-att-href="story.website_url" class="btn btn-primary">
+                                                Read More
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+    
+</odoo>
+

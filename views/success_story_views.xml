@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- list View -->
+    <record id="view_success_story_tree" model="ir.ui.view">
+        <field name="name">success.story.list</field>
+        <field name="model">success.story</field>
+        <field name="arch" type="xml">
+            <list string="Success Stories">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="category"/>
+                <field name="publication_date"/>
+                <field name="is_published" widget="boolean_toggle"/>
+                <field name="website_url" widget="url"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Form View -->
+    <record id="view_success_story_form" model="ir.ui.view">
+        <field name="name">success.story.form</field>
+        <field name="model">success.story</field>
+        <field name="arch" type="xml">
+            <form string="Success Story">
+                <header>
+                    <button name="action_publish" string="Publish" type="object" 
+                            class="oe_highlight" invisible="is_published"/>
+                    <button name="action_unpublish" string="Unpublish" type="object" 
+                            invisible="not is_published"/>
+                    <field name="is_published" widget="boolean_button" 
+                           options="{'terminology': 'published'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="website_publish_button" type="object" 
+                                class="oe_stat_button" icon="fa-globe">
+                            <field name="is_published" widget="website_publish_button"/>
+                        </button>
+                    </div>
+                    
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Success Story Title" required="1"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group name="basic_info" string="Basic Information">
+                            <field name="client_id" options="{'no_create': True}"/>
+                            <field name="category" placeholder="e.g., Technology, Healthcare, Finance"/>
+                            <field name="publication_date"/>
+                            <field name="website_url" widget="url" readonly="1"/>
+                        </group>
+                        <group name="product_link" string="Product Link (CTA)">
+                            <field name="product_id" options="{'no_create': True}"/>
+                            <field name="product_link_text" invisible="not product_id"/>
+                            <field name="product_link_url" widget="url" readonly="1" invisible="not product_id"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Content" name="content">
+                            <group>
+                                <group string="Short Description">
+                                    <field name="short_description" nolabel="1" 
+                                           placeholder="Brief description for cards (max 300 characters)"/>
+                                </group>
+                            </group>
+                            <group string="Main Content">
+                                <field name="main_text" nolabel="1" widget="html" 
+                                       options="{'style-inline': true}"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Images &amp; Media" name="media">
+                            <group>
+                                <group string="Logo">
+                                    <field name="logo" widget="image" class="oe_avatar"/>
+                                    <field name="logo_filename" invisible="1"/>
+                                </group>
+                                <group string="Main Image">
+                                    <field name="main_image" widget="image" class="oe_avatar"/>
+                                    <field name="main_image_filename" invisible="1"/>
+                                </group>
+                            </group>
+                            
+                            <group string="Extra Images">
+                                <group>
+                                    <label for="extra_image_1" string="Extra Image 1"/>
+                                    <field name="extra_image_1" widget="image" nolabel="1"/>
+                                    <field name="extra_image_1_filename" invisible="1"/>
+                                    
+                                    <label for="extra_image_2" string="Extra Image 2"/>
+                                    <field name="extra_image_2" widget="image" nolabel="1"/>
+                                    <field name="extra_image_2_filename" invisible="1"/>
+                                </group>
+                                <group>
+                                    <label for="extra_image_3" string="Extra Image 3"/>
+                                    <field name="extra_image_3" widget="image" nolabel="1"/>
+                                    <field name="extra_image_3_filename" invisible="1"/>
+                                    
+                                    <label for="extra_image_4" string="Extra Image 4"/>
+                                    <field name="extra_image_4" widget="image" nolabel="1"/>
+                                    <field name="extra_image_4_filename" invisible="1"/>
+                                </group>
+                            </group>
+                            
+                            <group string="Video">
+                                <field name="video_url" placeholder="https://www.youtube.com/watch?v=xxxxx"/>
+                                <field name="video_embed_code" readonly="1" invisible="not video_embed_code"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Extra Texts" name="extra_texts">
+                            <group string="Additional Content Sections">
+                                <group string="Extra Text 1">
+                                    <field name="extra_text_1" nolabel="1" widget="html" 
+                                           options="{'style-inline': true}"/>
+                                </group>
+                                <group string="Extra Text 2">
+                                    <field name="extra_text_2" nolabel="1" widget="html" 
+                                           options="{'style-inline': true}"/>
+                                </group>
+                                <group string="Extra Text 3">
+                                    <field name="extra_text_3" nolabel="1" widget="html" 
+                                           options="{'style-inline': true}"/>
+                                </group>
+                                <group string="Extra Text 4">
+                                    <field name="extra_text_4" nolabel="1" widget="html" 
+                                           options="{'style-inline': true}"/>
+                                </group>
+                                <group string="Extra Text 5">
+                                    <field name="extra_text_5" nolabel="1" widget="html" 
+                                           options="{'style-inline': true}"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="SEO" name="seo">
+                            <group>
+                                <field name="website_meta_title"/>
+                                <field name="website_meta_description"/>
+                                <field name="website_meta_keywords"/>
+                                <field name="url_slug" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Search View -->
+    <record id="view_success_story_search" model="ir.ui.view">
+        <field name="name">success.story.search</field>
+        <field name="model">success.story</field>
+        <field name="arch" type="xml">
+            <search string="Success Stories">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="category"/>
+                <filter string="Published" name="published" domain="[('is_published', '=', True)]"/>
+                <filter string="Unpublished" name="unpublished" domain="[('is_published', '=', False)]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Client" name="group_client" context="{'group_by': 'client_id'}"/>
+                    <filter string="Category" name="group_category" context="{'group_by': 'category'}"/>
+                    <filter string="Publication Date" name="group_date" context="{'group_by': 'publication_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Action -->
+    <record id="action_success_story" model="ir.actions.act_window">
+        <field name="name">Success Stories</field>
+        <field name="res_model">success.story</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_published': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Success Story
+            </p>
+            <p>
+                Manage testimonials and success stories that will be automatically published on your website.
+            </p>
+        </field>
+    </record>
+    
+</odoo>
+

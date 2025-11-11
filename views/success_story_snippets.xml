@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Success Stories Slider Snippet -->
+    <template id="s_success_stories_slider" name="Success Stories Slider">
+        <section class="s_success_stories_slider pt-5 pb-5" t-att-data-category="context.get('category') or None">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h2 class="mb-3">Success Stories</h2>
+                        <p class="lead">Discover how our clients achieve success</p>
+                    </div>
+                </div>
+                
+                <!-- Category Filter -->
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <div class="btn-group success-stories-filter" role="group">
+                            <button type="button" class="btn btn-outline-primary active" data-category="all">
+                                All
+                            </button>
+                            <!-- Categories will be dynamically loaded -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slider Container -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="success-stories-slider-wrapper position-relative">
+                            <!-- Previous Arrow -->
+                            <button class="slider-arrow slider-arrow-prev" type="button">
+                                <i class="fa fa-chevron-left"/>
+                            </button>
+                            
+                            <!-- Slider -->
+                            <div class="success-stories-slider-container overflow-hidden">
+                                <div class="success-stories-slider d-flex" data-limit="10">
+                                    <!-- Stories will be loaded here dynamically -->
+                                    <div class="story-card-placeholder">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Next Arrow -->
+                            <button class="slider-arrow slider-arrow-next" type="button">
+                                <i class="fa fa-chevron-right"/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+    
+    <!-- Snippet Options -->
+    <record id="s_success_stories_slider_options" model="ir.ui.view">
+        <field name="name">s_success_stories_slider_options</field>
+        <field name="key">success_stories_builder.s_success_stories_slider</field>
+        <field name="type">qweb</field>
+        <field name="mode">extension</field>
+        <field name="inherit_id" ref="website.snippet_options"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <div data-js="SuccessStoriesSlider" 
+                     data-selector=".s_success_stories_slider">
+                    <we-select string="Items to Display" data-attribute-name="itemsToShow" data-no-preview="true">
+                        <we-button data-select-data-attribute="3">3</we-button>
+                        <we-button data-select-data-attribute="4">4</we-button>
+                        <we-button data-select-data-attribute="5">5</we-button>
+                        <we-button data-select-data-attribute="6">6</we-button>
+                    </we-select>
+                    <we-select string="Items Limit" data-attribute-name="itemsLimit" data-no-preview="true">
+                        <we-button data-select-data-attribute="5">5</we-button>
+                        <we-button data-select-data-attribute="10">10</we-button>
+                        <we-button data-select-data-attribute="15">15</we-button>
+                        <we-button data-select-data-attribute="20">20</we-button>
+                    </we-select>
+                    <we-input string="Category (exact)" data-attribute-name="category" data-no-preview="true"
+                             placeholder="all / Retail / SaaS"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Add snippet to website builder -->
+    <template id="success_stories_snippet_template" inherit_id="website.snippets">
+        <xpath expr="//snippets[@id='snippet_content']" position="inside">
+            <t t-snippet="success_stories_builder.s_success_stories_slider"
+               string="Success Stories Slider"
+               group="content"
+               t-thumbnail="/success_stories_builder/static/src/img/snippet_thumb.svg">
+                <keywords>success stories testimonials slider carousel reviews clients</keywords>
+            </t>
+        </xpath>
+    </template>
+    
+</odoo>
+

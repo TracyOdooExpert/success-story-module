@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Main Success Stories App Menu -->
+    <menuitem id="menu_success_stories_root"
+              name="Success Stories"
+              sequence="95"
+              web_icon="success_stories_builder,static/description/icon.svg"/>
+    
+    <!-- Success Stories Submenu -->
+    <menuitem id="menu_success_stories"
+              name="Success Stories"
+              parent="menu_success_stories_root"
+              action="action_success_story"
+              sequence="10"/>
+    
+</odoo>
+

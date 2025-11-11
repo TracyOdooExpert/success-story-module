@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- Website Menu for Success Stories -->
+        <record id="menu_success_stories_website" model="website.menu">
+            <field name="name">Success Stories</field>
+            <field name="url">/success-stories</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence">50</field>
+        </record>
+        
+    </data>
+</odoo>
+
