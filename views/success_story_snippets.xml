@@ -92,7 +92,6 @@
             <t t-snippet="success_stories_builder.s_success_stories_slider"
                string="Success Stories Slider"
                group="content"
-               t-thumbnail="/success_stories_builder/static/src/img/snippet_thumb.svg">
                 <keywords>success stories testimonials slider carousel reviews clients</keywords>
             </t>
         </xpath>
